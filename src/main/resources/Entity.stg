@@ -1,0 +1,47 @@
+
+group entity;
+
+entityroot(type) ::= <<
+class $type.nameCalmelU$ {
+
+public $type.nameCalmelU$(){}
+
+public $type.nameCalmelU$(Recordset rs){
+    super(rs);
+}
+
+public $type.nameCalmelU$(Recordset rs,Boolean hasNext){
+    super(rs,hasNext);
+}
+
+$type.fields:listItem()$
+
+$type.fields:getter()$
+$type.fields:setter()$
+$toString(type)$
+}
+>>
+
+listItem() ::= <<
+
+@TableColumn("$it.name$")
+private $it.type.name$ $it.nameCalmelL$;
+
+>>
+
+getter() ::= <<
+public $it.type.name$ get$it.nameCalmelU$(){return $it.nameCalmelL$;}
+
+>>
+
+setter() ::= <<
+public void set$it.nameCalmelU$($it.type.name$ $it.nameCalmelL$){this.$it.nameCalmelL$=$it.nameCalmelL$;}
+
+>>
+
+toString(type) ::= <<
+public String toString() {
+return "$type.nameCalmelU$ {"+$type.fields:{ "$it.nameCalmelL$="+$it.nameCalmelL$ }; separator="+\",\"+"$ +"}";
+}
+
+>>

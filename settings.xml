@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<settings>
+    <conn>testconnnnnn</conn>
+    <Group name="firstGroup">
+        <DBObjects>abs.iacq_order% abs.fm_%</DBObjects>
+        <entityFolder>c:\temp</entityFolder>
+        <serviceFolder>c:\temp</serviceFolder>
+        <singleService>false</singleService>
+    </Group>
+    <Group name="firstGroup">
+        <DBObjects>abs.iacq_order% abs.fm_%</DBObjects>
+        <entityFolder>c:\temp</entityFolder>
+        <serviceFolder>c:\temp</serviceFolder>
+        <singleService>false</singleService>
+    </Group>
+</settings>

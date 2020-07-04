@@ -1,0 +1,29 @@
+
+group service;
+
+serviceroot(pkg) ::= <<
+class $pkg.nameCalmelU$Service {
+
+$pkg.methods:meth()$
+}
+>>
+
+meth() ::= <<
+
+public $TypeVoid(it)$ $it.nameCalmelL$($it.params:TypeAndName(); separator=", "$) throws ServiceException {
+return $TypeEmpty(it)$ $dbMethod(it)$($it.params:Name(); separator=", "$$dbMethodFuncSuffix(it)$);
+};
+
+>>
+
+TypeVoid(method) ::= <<$if(method.isProcedure)$void$else$$method.result.type.nameCalmelU$$endif$>>
+
+TypeEmpty(method) ::= <<$if(method.isProcedure)$$else$($method.result.type.nameCalmelU$)$endif$ >>
+
+dbMethod(method) ::= <<$if(method.isProcedure)$procedure$else$function_cursor_list$endif$>>
+
+dbMethodFuncSuffix(method) ::= <<$if(method.isProcedure)$$else$,$method.result.type.nameCalmelU$.class$endif$>>
+
+TypeAndName(param) ::= <<$param.type.nameCalmelU$ $param.nameCalmelL$>>
+
+Name(param) ::= <<$param.nameCalmelL$>>

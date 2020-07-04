@@ -1,10 +1,13 @@
 package org.home.models;
 
+import lombok.Data;
+
 import java.util.List;
 
 /**
  * Created by oleg on 2017-07-11.
  */
+@Data
 public class Pkg implements INamed{
     List<TableType> tableTypes;
     String name;
@@ -16,25 +19,4 @@ public class Pkg implements INamed{
         this.methods = methods;
     }
 
-    public List<TableType> getTableTypes() {
-        return tableTypes;
-    }
-
-    public List<Method> getMethods() {
-        return methods;
-    }
-
-    @Override
-    public String toString() {
-        return "Pkg{" +
-                "tableTypes=" + tableTypes +
-                ", name='" + name + '\'' +
-                ", methods=" + methods +
-                '}';
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
 }

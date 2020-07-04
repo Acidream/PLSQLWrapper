@@ -1,15 +1,15 @@
 package org.home.models;
 
+import lombok.Data;
 import org.home.dbreader.OraFieldDefRow;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.home.settings.Utils.listToString;
-
 /**
  * Created by oleg on 2017-07-11.
  */
+@Data
 public class Method implements INamed {
     Field result;
     private String name;
@@ -22,26 +22,6 @@ public class Method implements INamed {
         this.result = result;
         this.name = name;
         this.params = params;
-    }
-
-    public void setResult(Field result) {
-        this.result = result;
-    }
-
-    public void setParams(List<Field> params) {
-        this.params = params;
-    }
-
-    public Field getResult() {
-        return result;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<Field> getParams() {
-        return params;
     }
 
 
@@ -85,11 +65,4 @@ public class Method implements INamed {
         return res;
     }
 
-    @Override
-    public String toString() {
-        return "Method  "+ name +"   {" +
-                "result=" + result +
-                ", params=\n" + listToString(params,"  ","\n") +
-                '}';
-    }
 }

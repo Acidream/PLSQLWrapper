@@ -1,11 +1,13 @@
 package org.home.models;
 
+import lombok.Data;
 import org.home.dbreader.OraFieldDefRow;
 import org.home.dbreader.TypeMap;
 
 /**
  * Created by oleg on 2017-07-10.
  */
+@Data
 public class Field implements INamed {
 
     public static final String INOUT_NONE = "NONE";
@@ -31,18 +33,6 @@ public class Field implements INamed {
     private Type type;
     private String inOut;
 
-    public String getName() {
-        return name;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public String getInOut() {
-        return inOut;
-    }
-
     public boolean getIsIn() {
         return inOut == INOUT_IN || inOut == INOUT_INOUT;
     }
@@ -64,12 +54,4 @@ public class Field implements INamed {
 
     }
 
-    @Override
-    public String toString() {
-        return "Field{" +
-                "name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", inOut=" + inOut +
-                '}';
-    }
 }

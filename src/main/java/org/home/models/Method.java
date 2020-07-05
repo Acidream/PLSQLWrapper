@@ -59,7 +59,7 @@ public class Method implements INamed {
             if (fd.data_level > 0) {//элемент сложного типа
                 ((TableType) currTableField.getType()).getFields().add(Field.FromFieldDefSimpleType(fd));
             }
-            if (fd.data_level == 0 && !fd.data_type.equalsIgnoreCase("PL/SQL RECORD")) {//корневрой простой тип
+            if (fd.data_level == 0 ) {//корневрой простой тип
                 args.add(Field.FromFieldDefSimpleType(fd));
             }
 

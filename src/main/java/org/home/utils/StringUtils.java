@@ -5,6 +5,11 @@ import com.google.common.base.CaseFormat;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Created by oleg on 2017-07-12.
@@ -32,6 +37,29 @@ public class StringUtils {
         InputStream is = classLoader.getResourceAsStream(fileName);
         return new InputStreamReader(is);
 
+    }
+
+    public static <T> String join(List<T> list, Function<? super T, String> f) {
+        return join(list, f, ", ");
+    }
+
+    public static <T> String join(List<T> list, Function<? super T, String> f, String delim) {
+        return list.stream().map(f).collect(Collectors.joining(delim));
+    }
+
+    public static String flatJoin(Object... objs) {
+        ArrayList<String> res = new ArrayList<>();
+        for (Object obj : objs) {
+            if (obj instanceof String) {
+                res.add((String) obj);
+                continue;
+            }
+            if (obj instanceof List) {
+                res.addAll((Collection<? extends String>) obj);
+                continue;
+            }
+        }
+       return String.join(", ",res);
     }
 
 

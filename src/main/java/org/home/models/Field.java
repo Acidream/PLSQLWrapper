@@ -54,4 +54,9 @@ public class Field implements INamed {
 
     }
 
+
+    public String toJava(){
+        return type.getName()+" "+getNameCalmelL();
+    }
+
 }

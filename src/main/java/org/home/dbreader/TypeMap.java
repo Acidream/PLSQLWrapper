@@ -9,6 +9,7 @@ import java.util.Map;
  */
 public class TypeMap {
     private static final Map<String, String> oracleToJava;
+
     static {
         Map<String, String> map = new HashMap<String, String>();
         map.put("varchar", "String");
@@ -20,13 +21,17 @@ public class TypeMap {
         oracleToJava = Collections.unmodifiableMap(map);
     }
 
-    public static String getJavaType(String dbTypeString,Integer dataPrecision,Integer dataScale){
-        if (oracleToJava.containsKey(dbTypeString.toLowerCase())) return oracleToJava.get(dbTypeString.toLowerCase());
+    public static String getJavaType(String dbTypeString, Integer dataPrecision, Integer dataScale) {
+        if (oracleToJava.containsKey(dbTypeString.toLowerCase()))
+            return oracleToJava.get(dbTypeString.toLowerCase());
+
         if (dbTypeString.equalsIgnoreCase("NUMBER")) {
-            if (dataPrecision!=null && dataPrecision.equals(38) && dataScale == null) return "Long";
+            if (dataPrecision != null && dataPrecision.equals(38) && dataScale == null) return "Long";
             return "Double";
         }
-        System.out.println("Oracle type:"+dbTypeString +" in not mapped!");
+        if (dbTypeString.equalsIgnoreCase("REF CURSOR"))
+            return "List";
+        System.out.println("Oracle type:" + dbTypeString + " in not mapped!");
         return "UNKNOWN";
 
 

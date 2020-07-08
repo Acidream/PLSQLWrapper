@@ -10,14 +10,17 @@ import java.util.List;
  */
 @Data
 public class TableType extends Type {
-    private String name;
-    boolean isRefCursor=false;
-    List<Field> fields= new ArrayList<Field>();
-
+    boolean isRefCursor = false;
+    List<Field> fields = new ArrayList<Field>();
 
 
     public TableType(String name) {
         super(name);
+    }
+
+    public TableType(String name, boolean isRefCursor) {
+        super(name);
+        this.isRefCursor = isRefCursor;
     }
 
 

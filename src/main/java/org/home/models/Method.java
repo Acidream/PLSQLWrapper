@@ -17,6 +17,7 @@ public class Method implements INamed {
     Field result;
     List<Field> params;
     private String name;
+    private String packageName = "";
 
     public Method() {
     }
@@ -53,13 +54,14 @@ public class Method implements INamed {
             if (fd.data_type.equalsIgnoreCase("REF CURSOR")) { //начался сложный тип
                 if (currTableField == null)
                     currTableField = new Field(fd.getArgument_name(), new TableType(fd.type_subname != null ? fd.type_subname + "_rec" : fd.package_name + "_rec" + fd.position), fd.getIN_OUT());
+
                 continue;
             }
 
             if (fd.data_level > 0) {//элемент сложного типа
                 ((TableType) currTableField.getType()).getFields().add(Field.FromFieldDefSimpleType(fd));
             }
-            if (fd.data_level == 0 ) {//корневрой простой тип
+            if (fd.data_level == 0) {//корневрой простой тип
                 args.add(Field.FromFieldDefSimpleType(fd));
             }
 
@@ -88,7 +90,21 @@ public class Method implements INamed {
     }
 
     private List<String> paramsTypeName() {
-        return params.stream().map(p -> p.getNameCalmelL()).collect(Collectors.toList());
+        return params.stream().map(p -> p.getType().getName() + " " + p.getNameCalmelL()).collect(Collectors.toList());
+    }
+
+    private boolean isResultTableType() {
+        return (result.getType() instanceof TableType && !((TableType) result.getType()).isRefCursor);
+    }
+
+    private boolean isResultRC() {
+        return (result.getType() instanceof TableType && ((TableType) result.getType()).isRefCursor);
+    }
+
+    private String getOutTypeName() {
+        if (getResult().getType().getName() != null)
+            return getResult().getType().getName();
+        return getNameCalmelU() + "Res";
     }
 
     public String toJava() {
@@ -97,15 +113,29 @@ public class Method implements INamed {
             return
                     "public void " + getNameCalmelL() + "(" + flatJoin(paramsTypeName()) + ")" +
                             "{" +
-                            "proc(" + flatJoin("\"" + name + "\"", paramsName()) + ")" +
+                            "proc(" + flatJoin("\"" + name + "\"", paramsName()) + ");" +
                             "}";
         } else {
             return
-                    "public " + getResult().getType().getName() + " " + getNameCalmelL() + "(" + flatJoin(paramsTypeName()) + ")" +
+                    "public " + getOutTypeName() + " " + getNameCalmelL() + "(" + flatJoin(paramsTypeName()) + ")" +
                             "{" +
-                            "return func(" + flatJoin("\"" + name + "\"", getResult().getType().getName() + ".class", paramsName()) + ")" +
-                            "}";
+                            "return " + (isResultRC() ? "func_cursor" : "func") + "(" + flatJoin("\"" + name + "\"", getOutTypeName() + ".class", paramsName()) + ");" +
+                            "} \n" + renderComplexType();
+
+
         }
+    }
+
+    private String renderComplexType() {
+        if (!(isResultRC() || isResultTableType()))
+            return "";
+        TableType tt = (TableType) result.getType();
+        if (tt.fields.size() == 0)
+            return "";
+        return " @Data\n" +
+                "class " + getOutTypeName() + "{ \n" +
+                tt.fields.stream().map(p -> "   " + p.getType().getName() + " " + p.getNameCalmelL() + ";\n").collect(Collectors.joining()) +
+                "}";
 
 
     }

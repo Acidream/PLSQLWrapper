@@ -1,15 +1,13 @@
 package org.home.sourcereaderwriter;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FileSearcherTest {
 
-    @Test
+   // @Test
     void search() {
         FileUtils.writeText("Test.java", "import ...\n" +
-                "@GenDbProc(\"myproc\")\n" +
+                "@Pkg(\"myproc\")\n" +
                 " class Test {  some methods...  \n" +
                 "//-------------------GENSTART-------------------\n" +
                 "some new content\n" +
@@ -18,7 +16,7 @@ class FileSearcherTest {
                 "}");
 
         FileUtils.writeText("Test1.java", "import ...\n" +
-                "@GenDbProc(\"myproc\")\n" +
+                "@Pkg(\"myproc\")\n" +
                 " class Test {  some methods...  \n" +
                 "//-------------------GENSTART-------------------\n" +
                 "some new content\n" +

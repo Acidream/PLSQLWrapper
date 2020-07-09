@@ -3,7 +3,6 @@ package org.home.dbreader;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
-
 import org.home.models.Field;
 import org.home.models.Method;
 import org.home.models.Pkg;
@@ -11,16 +10,16 @@ import org.home.models.TableType;
 import org.home.settings.DBConnection;
 
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by oleg on 2017-07-15.
  */
 public class DBReader {
-    private static final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
-    private static final String DB_CONNECTION = "jdbc:oracle:thin:@localhost:1521/orcl";
-    private static final String DB_USER = "abs";
-    private static final String DB_PASSWORD = "qaz";
+
 
     public static List<OraMethodDef> getOraMethodDefs(String owner, String objectNameCriteria) throws SQLException {
         QueryRunner run = new QueryRunner(DBConnection.getDS());

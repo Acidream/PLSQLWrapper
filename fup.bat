@@ -1,0 +1,1 @@
+"G:\Program Files\Java\jdk1.8.0_172\bin\java.exe" -jar target/PLSQLWrapper-1.0-SNAPSHOT-jar-with-dependencies.jar jdbc:oracle:thin:@localhost:1521/orcl abs qaz %1

@@ -1,5 +1,6 @@
 package org.home.sourcereaderwriter;
 
+import lombok.Getter;
 import lombok.SneakyThrows;
 
 import java.io.BufferedReader;
@@ -7,6 +8,7 @@ import java.io.FileReader;
 
 public class AnnotationsReader {
     String file;
+    @Getter
     Annotations annotations;
 
     public AnnotationsReader(String file) {
@@ -21,7 +23,7 @@ public class AnnotationsReader {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             while ((line = br.readLine()) != null) {
 
-                if (line.trim().startsWith(Annotations.PROC_ANNOTATION)) {
+                if (line.trim().startsWith(Annotations.PROC_ANNOTATION + " ") || line.trim().startsWith(Annotations.PROC_ANNOTATION + "(")) {
                     String procLine = line.trim();
                     procLine = procLine.replace(Annotations.PROC_ANNOTATION, "");
                     procLine = procLine.replace("\"", "");

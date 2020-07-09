@@ -10,14 +10,14 @@ class ContentWriterTest {
     void writeNew() {
 
         FileUtils.writeText("Test.java", "import ...\n" +
-                "@GenProc(\"myproc\")\n" +
+                "@Pkg(\"myproc\")\n" +
                 " class Test {  some methods...  }");
 
         ContentWriter cw = new ContentWriter("Test.java", "some new content\nand very new");
         cw.write();
         String text = FileUtils.readText("Test.java");
         assertEquals("import ...\n" +
-                "@GenProc(\"myproc\")\n" +
+                "@Pkg(\"myproc\")\n" +
                 " class Test {  some methods...  \n" +
                 "//-------------------GENSTART-------------------\n" +
                 "some new content\n" +
@@ -31,7 +31,7 @@ class ContentWriterTest {
     void writeExisting() {
 
         FileUtils.writeText("Test.java", "import ...\n" +
-                "@GenProc(\"myproc\")\n" +
+                "@Pkg(\"myproc\")\n" +
                 " class Test {  some methods...  \n" +
                 "//-------------------GENSTART-------------------\n" +
                 "some new content\n" +
@@ -43,7 +43,7 @@ class ContentWriterTest {
         cw.write();
         String text = FileUtils.readText("Test.java");
         assertEquals("import ...\n" +
-                "@GenProc(\"myproc\")\n" +
+                "@Pkg(\"myproc\")\n" +
                 " class Test {  some methods...  \n" +
                 "//-------------------GENSTART-------------------\n" +
                 "epically new version\n" +

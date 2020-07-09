@@ -7,8 +7,8 @@ import java.util.Map;
 
 @Data
 public class Annotations {
-    public static String PROC_ANNOTATION = "@GenDbProc";
-    public static String FUNCRESP_ANNOTATION = "@GenDbFuncResp";
+    public static String PROC_ANNOTATION = "@Pkg";
+    public static String FUNCRESP_ANNOTATION = "@PkgFuncResp";
     public static String GENSTART_DIVIDER = "//-------------------GENSTART-------------------";
     public static String GENEND_DIVIDER = "//-------------------GENEND-------------------";
 

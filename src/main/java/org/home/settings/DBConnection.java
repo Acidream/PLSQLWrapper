@@ -12,11 +12,12 @@ import java.sql.SQLException;
  */
 public class DBConnection {
 
+    public static ConnSettings settings = new ConnSettings();
+
+
     private static final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
-    private static final String DB_CONNECTION_URL = "jdbc:oracle:thin:@localhost:1521/orcl";
-    private static final String DB_USER = "abs";
-    private static final String DB_PASSWORD = "qaz";
-//todo:rewrite using settings
+
+    //todo:rewrite using settings
     public static Connection get() {
         Connection dbConnection = null;
         try {
@@ -25,7 +26,7 @@ public class DBConnection {
             System.out.println(e.getMessage());
         }
         try {
-            dbConnection = DriverManager.getConnection(DB_CONNECTION_URL, DB_USER, DB_PASSWORD);
+            dbConnection = DriverManager.getConnection(settings.DB_CONNECTION_URL, settings.DB_USER, settings.DB_PASSWORD);
             return dbConnection;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -36,9 +37,9 @@ public class DBConnection {
 
     public static DataSource getDS() throws SQLException {
         OracleDataSource ds = new OracleDataSource();
-        ds.setURL(DB_CONNECTION_URL);
-        ds.setUser(DB_USER);
-        ds.setPassword(DB_PASSWORD);
+        ds.setURL(settings.DB_CONNECTION_URL);
+        ds.setUser(settings.DB_USER);
+        ds.setPassword(settings.DB_PASSWORD);
         return ds;
     }
 

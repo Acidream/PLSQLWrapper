@@ -32,7 +32,8 @@ public class FileSearcher {
     }
 
     @SneakyThrows
-    private boolean hasAnnotation(String filePath) {
+    public boolean hasAnnotation(String filePath) {
+        System.out.println(filePath);
         String line = "";
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             while ((line = br.readLine()) != null) {

@@ -13,8 +13,8 @@ class AnnotationsReaderTest {
     @BeforeEach
     void setUp() {
         writeText("Test1.java", "import ...\n" +
-                "@GenDbProc(\"myproc\")\n" +
-                "@GenDbFuncResp(\"func1:res1;func2:res2\")\n" +
+                "@Pkg(\"myproc\")\n" +
+                "@PkgFuncResp(\"func1:res1;func2:res2\")\n" +
                 " class Test {  some methods...  \n" +
                 "//-------------------GENSTART-------------------\n" +
                 "some new content\n" +
